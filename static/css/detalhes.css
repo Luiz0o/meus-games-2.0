@@ -1,0 +1,180 @@
+.details-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 1.5rem 1rem 4rem 1rem;
+}
+
+.back-top-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: #9ca3af;
+    text-decoration: none;
+    font-size: 0.95rem;
+    font-weight: 500;
+    margin-bottom: 2rem;
+    transition: color 0.2s;
+}
+
+.back-top-link:hover { color: white; }
+
+/* Layout Split (Dois lados) */
+.details-layout {
+    display: grid;
+    grid-template-columns: 380px 1fr;
+    gap: 3.5rem;
+    align-items: start;
+}
+
+/* Zona da Capa */
+.details-cover-zone {
+    width: 100%;
+    height: 520px;
+    border-radius: 24px;
+    overflow: hidden;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+}
+
+.details-cover-zone img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.no-cover-details {
+    width: 100%;
+    height: 100%;
+    background-color: rgba(20, 28, 46, 0.4);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 4rem;
+    color: #4b5563;
+}
+
+/* Zona de Informações */
+.details-info-zone {
+    display: flex;
+    flex-direction: column;
+}
+
+.platform-badge {
+    background-color: rgba(37, 99, 235, 0.15);
+    color: #3b82f6;
+    padding: 0.3rem 0.8rem;
+    border-radius: 50px;
+    font-size: 0.75rem;
+    font-weight: 700;
+    align-self: flex-start;
+    margin-bottom: 0.75rem;
+    text-transform: uppercase;
+}
+
+.game-display-title {
+    font-size: 2.75rem;
+    font-weight: 700;
+    color: white;
+    margin: 0 0 1rem 0;
+    line-height: 1.2;
+}
+
+/* Estrelas */
+.rating-display-block {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+    margin-bottom: 2rem;
+}
+
+.display-stars {
+    color: #eab308;
+    font-size: 1.35rem;
+    display: flex;
+    gap: 0.2rem;
+}
+
+.rating-text-label {
+    font-size: 0.85rem;
+    color: #9ca3af;
+    font-weight: 500;
+}
+
+/* Seções de conteúdo interno */
+.info-section {
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+    margin-bottom: 2rem;
+}
+
+.section-title {
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: #9ca3af;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+/* Caixa de Observações */
+.observations-box {
+    background-color: rgba(20, 28, 46, 0.3);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    border-radius: 14px;
+    padding: 1.25rem 1.5rem;
+    color: #e5e7eb;
+    font-size: 1.05rem;
+    line-height: 1.6;
+}
+
+/* Botões Inferiores */
+.details-actions-bar {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-top: 1rem;
+}
+
+.btn-details-action {
+    height: 46px;
+    padding: 0 1.75rem;
+    border-radius: 50px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: white;
+    text-decoration: none;
+    border: none;
+    cursor: pointer;
+    transition: transform 0.1s, filter 0.2s;
+}
+
+.btn-details-action:hover { filter: brightness(1.1); }
+.btn-details-action:active { transform: scale(0.98); }
+
+.btn-orange { background-color: #f97316; }
+.btn-red { background-color: #ef4444; }
+.btn-border {
+    background-color: transparent;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    color: #9ca3af;
+}
+.btn-border:hover {
+    border-color: rgba(255, 255, 255, 0.2);
+    color: white;
+}
+
+/* Responsivo */
+@media (max-width: 900px) {
+    .details-layout {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+    }
+    .details-cover-zone {
+        max-width: 340px;
+        height: 460px;
+        margin: 0 auto;
+    }
+}

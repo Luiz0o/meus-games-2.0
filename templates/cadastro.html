@@ -1,0 +1,156 @@
+{% extends 'base.html' %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/cadastro.css') }}">
+{% endblock %}
+
+{% block title %}Cadastrar Novo Jogo - Minha Biblioteca{% endblock %}
+
+{% block content %}
+<div class="form-container">
+    <div class="form-header">
+        <h2>Cadastrar Novo Jogo</h2>
+        <p>Preencha os detalhes para adicionar à sua biblioteca.</p>
+    </div>
+
+    <form action="{{ url_for('salvar_jogo') }}" method="POST" enctype="multipart/form-data" class="game-form">
+        <div class="form-grid">
+            
+            <!-- COLUNA ESQUERDA: Upload da Capa (Design Vertical) -->
+            <div class="form-group-capa">
+                <label class="section-label">Capa do Jogo</label>
+                
+                <div id="drop-zone" class="drop-zone-vertical">
+                    <!-- Input oculto controlado via JS -->
+                    <input type="file" name="cover" id="cover-input" accept="image/*" class="drop-zone-input" style="display: none;">
+                    
+                    <!-- Estado Inicial -->
+                    <div id="drop-zone-prompt" class="drop-zone-prompt">
+                        <div class="icon-container">
+                            <i class="fa-solid fa-image"></i>
+                        </div>
+                        <h3>Arraste a capa aqui</h3>
+                        <p>ou clique para selecionar</p>
+                        <button type="button" class="btn-selecionar">
+                            <i class="fa-solid fa-cloud-arrow-up"></i> Selecionar arquivo
+                        </button>
+                    </div>
+                    
+                    <!-- Estado com Foto Inserida (Preenche 100% o Card) -->
+                    <div id="preview-container" class="preview-container-vertical hidden">
+                        <img id="cover-preview" src="#" alt="Preview da Capa">
+                        <div class="preview-overlay">
+                            <button type="button" id="remove-preview" class="remove-preview-btn">
+                                <i class="fa-solid fa-trash"></i> Remover Foto
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- COLUNA DIREITA: Informações e Inputs -->
+            <div class="fields-section">
+                <!-- Campo: Nome do Jogo -->
+                <div class="form-group">
+                    <label for="title" class="section-label">Nome do jogo</label>
+                    <div class="input-wrapper">
+                        <i class="fa-solid fa-gamepad input-icon"></i>
+                        <input type="text" id="title" name="title" placeholder="Ex: The Last of Us Part II" required>
+                    </div>
+                </div>
+
+                <!-- Campo: Plataforma -->
+                <div class="form-group">
+                    <label class="section-label">Plataforma</label>
+                    <div class="platform-selector">
+                        {% for plat in ['PS3', 'PS4'] %}
+                        <label class="platform-radio">
+                            <input type="radio" name="platform" value="{{ plat }}" required>
+                            <span>{{ plat }}</span>
+                        </label>
+                        {% endfor %}
+                    </div>
+                </div>
+
+                <!-- Campo: Status (Toggles) -->
+                <div class="form-group">
+                    <label class="section-label">Status</label>
+                    <div class="status-toggles-container">
+                        <!-- Toggle: Zerado -->
+                        <div class="status-card-toggle">
+                            <div class="status-info">
+                                <i class="fa-solid fa-square-check status-icon icon-zerado"></i>
+                                <span>Zerado</span>
+                            </div>
+                            <label class="switch">
+                                <input type="checkbox" name="status_zerado">
+                                <span class="slider"></span>
+                            </label>
+                        </div>
+
+                        <!-- Toggle: Platinado -->
+                        <div class="status-card-toggle">
+                            <div class="status-info">
+                                <i class="fa-solid fa-trophy status-icon icon-platinado"></i>
+                                <span>Platinado</span>
+                            </div>
+                            <label class="switch">
+                                <input type="checkbox" name="status_platinado">
+                                <span class="slider"></span>
+                            </label>
+                        </div>
+
+                        <!-- Toggle: 100% Completo -->
+                        <div class="status-card-toggle">
+                            <div class="status-info">
+                                <i class="fa-solid fa-hundreds status-icon icon-cem">100</i>
+                                <span>100% Completo</span>
+                            </div>
+                            <label class="switch">
+                                <input type="checkbox" name="status_100">
+                                <span class="slider"></span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Campo: Avaliação por Estrelas -->
+                <div class="form-group">
+                    <label class="section-label">Avaliação</label>
+                    <div class="star-rating" id="star-rating">
+                        <input type="hidden" name="rating" id="rating-value" value="0">
+                        <i class="fa-regular fa-star star" data-value="1"></i>
+                        <i class="fa-regular fa-star star" data-value="2"></i>
+                        <i class="fa-regular fa-star star" data-value="3"></i>
+                        <i class="fa-regular fa-star star" data-value="4"></i>
+                        <i class="fa-regular fa-star star" data-value="5"></i>
+                    </div>
+                </div>
+
+                <!-- Campo: Observações -->
+                <div class="form-group">
+                    <label for="notes" class="section-label">Observações</label>
+                    <textarea id="notes" name="notes" rows="4" placeholder="O que achou do jogo? (opcional)"></textarea>
+                </div>
+
+                <!-- Ações do Formulário -->
+                <div class="form-actions">
+                    <a href="{{ url_for('index') }}" class="btn-cancel">Cancelar</a>
+                    <button type="submit" class="btn-submit-game">
+                        <i class="fa-solid fa-floppy-disk"></i> Salvar Jogo
+                    </button>
+                </div>
+
+            </div>
+        </div>
+    </form>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<!-- Importação da Biblioteca externa Chart.js -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<!-- Chamada do seu arquivo JS isolado e limpo -->
+<script src="{{ url_for('static', filename='js/cadastro.js') }}"></script>
+{% endblock %}

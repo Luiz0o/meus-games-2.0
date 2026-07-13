@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Minha Biblioteca de Jogos{% endblock %}</title>
+    <!-- Google Fonts para um visual moderno (Inter) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Font Awesome para os Ícones -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Estilos Globais -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/global.css') }}">
+    {% block extra_css %}{% endblock %}
+</head>
+<body>
+
+    <!-- NAVBAR SUPERIOR -->
+    <header class="navbar">
+        <div class="navbar-container">
+            <div class="logo">
+                <i class="fa-solid fa-gamepad logo-icon"></i>
+                <span class="logo-text">Minha <span class="highlight">Biblioteca</span></span>
+            </div>
+            
+            <div class="nav-menu">
+            <a href="{{ url_for('index') }}" class="nav-link {% if request.endpoint == 'index' %}active{% endif %}">
+                <i class="fa-solid fa-house"></i> Início
+            </a>
+            <a href="{{ url_for('listagem') }}" class="nav-link {% if request.endpoint == 'listagem' %}active{% endif %}">
+                <i class="fa-solid fa-gamepad"></i> Biblioteca
+            </a>
+            <a href="{{ url_for('estatisticas') }}" class="nav-link {% if request.endpoint == 'estatisticas' %}active{% endif %}">
+                <i class="fa-solid fa-chart-pie"></i> Estatísticas
+            </a>
+        </div>
+
+            <div class="nav-actions">
+                <a href="{{ url_for('novo_jogo') }}" class="btn-primary">
+                    <i class="fa-solid fa-plus"></i> Adicionar Jogo
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <!-- CONTEÚDO DINÂMICO -->
+    <main class="main-content">
+        <!-- Mensagens de Alerta (Flash Messages) -->
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                <div class="flash-container">
+                    {% for category, message in messages %}
+                        <div class="flash-message {{ category }}">
+                            {% if category == 'success' %}
+                                <i class="fa-solid fa-circle-check"></i>
+                            {% else %}
+                                <i class="fa-solid fa-circle-exclamation"></i>
+                            {% endif %}
+                            {{ message }}
+                        </div>
+                    {% endfor %}
+                </div>
+            {% endif %}
+        {% endwith %}
+
+        {% block content %}{% endblock %}
+    </main>
+
+    <!-- RODAPÉ -->
+    <footer class="footer">
+        <div class="footer-container">
+            <div class="footer-logo">
+                <i class="fa-solid fa-gamepad"></i>
+                <span>Minha Biblioteca de Jogos</span>
+            </div>
+            <p class="footer-credits">Desenvolvido por <strong>Luiz Felipe</strong> &middot; &copy; 2026</p>
+        </div>
+    </footer>
+
+    {% block extra_js %}{% endblock %}
+</body>
+</html>

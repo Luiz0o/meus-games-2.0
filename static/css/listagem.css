@@ -1,0 +1,289 @@
+.library-container {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.library-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1.5rem;
+}
+
+.library-title-zone h2 {
+    font-size: 2rem;
+    font-weight: 700;
+    margin-bottom: 0.25rem;
+}
+
+.game-counter {
+    color: var(--text-secondary);
+    font-size: 0.95rem;
+}
+
+/* ==================== NOVA BARRA DE FILTROS SUPERIOR ==================== */
+.filter-bar {
+    background-color: rgba(20, 28, 46, 0.4);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    border-radius: 50px;
+    padding: 0.75rem 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 2.5rem;
+}
+
+.search-wrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
+    flex: 1;
+}
+
+.search-wrapper i {
+    position: absolute;
+    left: 1.2rem;
+    color: #6b7280;
+}
+
+.search-wrapper input {
+    width: 100%;
+    background-color: rgba(11, 15, 25, 0.6);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    border-radius: 50px;
+    padding: 0.65rem 1rem 0.65rem 2.8rem;
+    color: white;
+    font-size: 0.9rem;
+    outline: none;
+}
+
+.filter-bar select {
+    background-color: rgba(11, 15, 25, 0.6);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    color: #9ca3af;
+    border-radius: 50px;
+    padding: 0.65rem 1.2rem;
+    font-size: 0.9rem;
+    outline: none;
+    cursor: pointer;
+}
+
+.btn-clear {
+    background: transparent;
+    border: none;
+    color: #9ca3af;
+    font-size: 0.9rem;
+    font-weight: 500;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    padding: 0.5rem 1rem;
+}
+
+.btn-clear:hover { color: white; }
+
+/* ==================== ESTADO VAZIO ==================== */
+.empty-state-card {
+    background-color: rgba(20, 28, 46, 0.2);
+    border: 1px dashed rgba(255, 255, 255, 0.05);
+    border-radius: 24px;
+    padding: 5rem 2rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    max-width: 650px;
+    margin: 2rem auto 0 auto;
+}
+
+.empty-icon-wrapper {
+    background-color: rgba(37, 99, 235, 0.1);
+    width: 80px;
+    height: 80px;
+    border-radius: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 2rem;
+}
+
+.empty-gamepad-icon {
+    font-size: 2.2rem;
+    color: #2563eb;
+}
+
+.empty-state-card h3 {
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+}
+
+.empty-state-card p {
+    color: var(--text-secondary);
+    font-size: 0.95rem;
+    max-width: 400px;
+    line-height: 1.5;
+}
+
+.mt-4 { margin-top: 1.5rem; }
+
+/* ==================== GRID DE CARDS E COMPONENTES INTERNOS ==================== */
+.games-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 2rem;
+}
+
+.game-card {
+    background-color: var(--card-bg, rgba(20, 28, 46, 0.4));
+    border: 1px solid rgba(255, 255, 255, 0.03);
+    border-radius: 16px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.game-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+    border-color: rgba(255, 255, 255, 0.1);
+}
+
+.game-cover-wrapper {
+    position: relative;
+    width: 100%;
+    height: 300px;
+    background-color: rgba(0, 0, 0, 0.2);
+}
+
+.game-cover-wrapper img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.game-platform-badge {
+    position: absolute;
+    top: 0.75rem;
+    right: 0.75rem;
+    background-color: rgba(13, 17, 26, 0.85);
+    backdrop-filter: blur(4px);
+    padding: 0.3rem 0.75rem;
+    border-radius: 9999px;
+    font-size: 0.75rem;
+    font-weight: 700;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    color: white;
+}
+
+.game-card-info {
+    padding: 1.25rem 1.25rem 0.75rem 1.25rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    flex-grow: 1;
+}
+
+.game-card-info h4 {
+    font-size: 1.05rem;
+    font-weight: 700;
+    color: white;
+    margin: 0;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+/* Sistema de Estrelas */
+.game-stars {
+    color: #eab308;
+    font-size: 0.85rem;
+}
+
+.game-card-status { 
+    display: flex; 
+    flex-wrap: wrap;
+    gap: 0.5rem; 
+}
+
+.badge {
+    font-size: 0.75rem;
+    font-weight: 600;
+    padding: 0.25rem 0.6rem;
+    border-radius: 6px;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.3rem;
+}
+
+.badge-zerado { background-color: rgba(34, 197, 94, 0.15); color: #22c55e; }
+.badge-platinado { background-color: rgba(234, 179, 8, 0.15); color: #eab308; }
+.badge-cem { background-color: rgba(239, 68, 68, 0.15); color: #ef4444; }
+
+/* Botões de Ação de Rodapé */
+.game-actions {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 0.5rem;
+    padding: 0 1.25rem 1.25rem 1.25rem;
+}
+
+.btn-action {
+    border: none;
+    height: 36px;
+    border-radius: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 0.95rem;
+    cursor: pointer;
+    text-decoration: none;
+    transition: filter 0.2s, transform 0.1s;
+}
+
+.btn-action:hover { filter: brightness(1.15); }
+.btn-action:active { transform: scale(0.95); }
+
+/* ==========================================================================
+   ALINHAMENTO DO FORMULÁRIO DE EXCLUSÃO NA LISTAGEM
+   ========================================================================== */
+
+/* Faz o formulário se comportar como um elemento de bloco em linha, ocupando sua coluna no grid */
+.game-actions form {
+    display: inline-block;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+/* Garante que o botão de excluir ocupe 100% da largura da coluna dele */
+.game-actions .btn-delete {
+    width: 100%;
+    height: 36px;
+    border: none;
+    background-color: #ef4444;
+    color: #ffffff;
+    border-radius: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: background-color 0.2s ease, transform 0.1s ease;
+}
+
+/* Efeito de hover para o botão de excluir */
+.game-actions .btn-delete:hover {
+    background-color: #dc2626;
+}
+
+.game-actions .btn-delete:active {
+    transform: scale(0.95);
+}
+
+.btn-view { background-color: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 255, 255, 0.08); }
+.btn-edit { background-color: #f97316; }
+.btn-delete { background-color: #ef4444; }

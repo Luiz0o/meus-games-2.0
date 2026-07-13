@@ -1,0 +1,87 @@
+{% extends 'base.html' %}
+
+{% block title %}{{ jogo.title }} - Detalhes{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/detalhes.css') }}">
+{% endblock %}
+
+{% block content %}
+<div class="details-container">
+    <!-- Link superior para voltar rápido -->
+    <a href="{{ url_for('listagem') }}" class="back-top-link">
+        <i class="fa-solid fa-arrow-left"></i> Voltar
+    </a>
+
+    <div class="details-layout">
+        <!-- Lado Esquerdo: Capa do Jogo -->
+        <div class="details-cover-zone">
+            {% if jogo.cover_url %}
+                <img src="{{ jogo.cover_url }}" alt="Capa de {{ jogo.title }}">
+            {% else %}
+                <div class="no-cover-details"><i class="fa-solid fa-gamepad"></i></div>
+            {% endif %}
+        </div>
+
+        <!-- Lado Direito: Informações Textuais -->
+        <div class="details-info-zone">
+            <span class="platform-badge">{{ jogo.platform }}</span>
+            <h1 class="game-display-title">{{ jogo.title }}</h1>
+
+            <!-- Estrelas de Avaliação e Texto Descritivo -->
+            <div class="rating-display-block">
+                <div class="display-stars">
+                    {% for i in range(5) %}
+                        {% if i < (jogo.rating|int) %}
+                            <i class="fa-solid fa-star"></i>
+                        {% else %}
+                            <i class="fa-regular fa-star"></i>
+                        {% endif %}
+                    {% endfor %}
+                </div>
+                <span class="rating-text-label">{{ nota_texto }}</span>
+            </div>
+
+            <!-- Bloco de Status -->
+            <div class="info-section">
+                <span class="section-title">Status</span>
+                <div class="status-badge-wrapper">
+                    {% if jogo.status_zerado %}
+                        <span class="badge badge-zerado"><i class="fa-solid fa-square-check"></i> Zerado</span>
+                    {% endif %}
+                    {% if jogo.status_platinado %}
+                        <span class="badge badge-platinado"><i class="fa-solid fa-trophy"></i> Platinado</span>
+                    {% endif %}
+                    {% if jogo.status_100 %}
+                        <span class="badge badge-cem">100% Completo</span>
+                    {% endif %}
+                    {% if not jogo.status_zerado and not jogo.status_platinado and not jogo.status_100 %}
+                        <span class="badge badge-em-andamento"><i class="fa-solid fa-ellipsis"></i> Em andamento</span>
+                    {% endif %}
+                </div>
+            </div>
+
+            <!-- Bloco de Observações -->
+            <div class="info-section">
+                <span class="section-title">Observações</span>
+                <div class="observations-box">
+                    {{ jogo.notes if jogo.notes else "Nenhuma observação cadastrada para este jogo." }}
+                </div>
+            </div>
+
+            <!-- Barra de Ações Inferiores -->
+            <div class="details-actions-bar">
+                <a href="{{ url_for('editar_jogo', jogo_id=jogo.id) }}" class="btn-details-action btn-orange">
+                    <i class="fa-solid fa-pen"></i> Editar
+                </a>
+                <button class="btn-details-action btn-red">
+                    <i class="fa-solid fa-trash-can"></i> Excluir
+                </button>
+                <a href="{{ url_for('listagem') }}" class="btn-details-action btn-border">
+                    <i class="fa-solid fa-arrow-left"></i> Voltar
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

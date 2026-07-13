@@ -1,0 +1,88 @@
+{% extends 'base.html' %}
+
+{% block title %}Estatísticas - Minha Biblioteca{% endblock %}
+
+{% block extra_css %}
+<!-- O ?v=1.1 força o navegador a atualizar o design na hora -->
+<link rel="stylesheet" href="{{ url_for('static', filename='css/estatisticas.css') }}?v=1.1">
+{% endblock %}
+
+{% block content %}
+<div class="dashboard-container">
+    <div class="dashboard-header">
+        <h2>Estatísticas</h2>
+        <p>Visão geral da sua coleção</p>
+    </div>
+
+    <!-- 5 Cards Superiores Analíticos -->
+    <div class="metrics-grid">
+        <div class="metric-card">
+            <i class="fa-solid fa-gamepad icon-blue"></i>
+            <div class="metric-value">{{ total }}</div>
+            <div class="metric-label">Total de Jogos</div>
+        </div>
+        <div class="metric-card">
+            <i class="fa-solid fa-trophy icon-gold"></i>
+            <div class="metric-value">{{ platinados }}</div>
+            <div class="metric-label">Platinados</div>
+        </div>
+        <div class="metric-card">
+            <i class="fa-regular fa-circle-check icon-green"></i>
+            <div class="metric-value">{{ zerados }}</div>
+            <div class="metric-label">Zerados</div>
+        </div>
+        <div class="metric-card">
+            <i class="fa-solid fa-wand-magic-sparkles icon-purple"></i>
+            <div class="metric-value">{{ status_100 }}</div>
+            <div class="metric-label">100% Completos</div>
+        </div>
+        <div class="metric-card">
+            <i class="fa-regular fa-star icon-star-blue"></i>
+            <div class="metric-value">{{ "%.1f"|format(media_notas) }}</div>
+            <div class="metric-label">Média de avaliação</div>
+        </div>
+    </div>
+
+    <!-- Seção de Gráficos do Meio (Lado a Lado) -->
+    <div class="charts-row">
+        <div class="chart-box-half">
+            <h3>Distribuição por plataforma</h3>
+            <div class="canvas-wrapper doughnut-size">
+                <canvas id="chartPlataformas"></canvas>
+            </div>
+        </div>
+        <div class="chart-box-half">
+            <h3>Jogos por avaliação</h3>
+            <div class="canvas-wrapper">
+                <canvas id="chartAvaliacoes"></canvas>
+            </div>
+        </div>
+    </div>
+
+    <!-- Gráfico Inferior (Largura Total) -->
+    <div class="chart-box-full">
+        <h3>Jogos cadastrados por mês</h3>
+        <div class="canvas-wrapper line-size">
+            <canvas id="chartEvolucao"></canvas>
+        </div>
+    </div>
+
+    <!-- Elemento invisível posicionado com segurança dentro do content -->
+    <div id="data-bridge" 
+         data-plataformas-labels='{{ plataformas_labels|tojson }}'
+         data-plataformas-valores='{{ plataformas_valores|tojson }}'
+         data-notas-valores='{{ notas_valores|tojson }}'
+         data-meses-labels='{{ meses_labels|tojson }}'
+         data-meses-valores='{{ meses_valores|tojson }}'
+         style="display: none;">
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<!-- Importação da Biblioteca externa Chart.js -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<!-- Chamada do seu arquivo JS isolado e limpo -->
+<script src="{{ url_for('static', filename='js/estatisticas.js') }}"></script>
+{% endblock %}

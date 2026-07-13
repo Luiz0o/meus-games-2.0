@@ -1,0 +1,148 @@
+{% extends 'base.html' %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/listagem.css') }}">
+{% endblock %}
+
+{% block title %}Minha Biblioteca - Jogos{% endblock %}
+
+{% block content %}
+<div class="library-container">
+    
+    <!-- Cabeçalho da Biblioteca -->
+    <div class="library-header">
+        <div class="library-title-zone">
+            <h2>Biblioteca</h2>
+            <p class="game-counter">
+                {{ jogos|length }} {% if jogos|length == 1 %}jogo cadastrado{% else %}jogos cadastrados{% endif %}
+            </p>
+        </div>
+    </div>
+
+    <!-- ESTADO 1: Se a biblioteca estiver vazia -->
+    {% if not jogos %}
+    <div class="empty-state-card">
+        <div class="empty-icon-wrapper">
+            <i class="fa-solid fa-gamepad empty-gamepad-icon"></i>
+        </div>
+        <h3>Sua biblioteca está vazia.</h3>
+        <p>Comece cadastrando o seu primeiro jogo e organize sua coleção.</p>
+        <a href="{{ url_for('novo_jogo') }}" class="btn-primary mt-4">
+            <i class="fa-solid fa-plus"></i> Cadastrar primeiro jogo
+        </a>
+    </div>
+
+    <!-- ESTADO 2: Quando houver jogos cadastrados -->
+    {% else %}
+    
+    <!-- Barra Superior de Filtros Dinâmicos -->
+    <div class="filter-bar">
+        <div class="search-wrapper">
+            <i class="fa-solid fa-magnifying-glass"></i>
+            <input type="text" id="search-input" placeholder="Pesquisar por nome...">
+        </div>
+        
+        <select id="filter-platform">
+            <option value="">Todas plataformas</option>
+            <option value="PC">PC</option>
+            <option value="PS3">PS3</option>
+            <option value="PS4">PS4</option>
+            <option value="PS5">PS5</option>
+        </select>
+
+        <select id="filter-rating">
+            <option value="">Todas avaliações</option>
+            <option value="5">5 estrelas</option>
+            <option value="4">4 estrelas e acima</option>
+            <option value="3">3 estrelas e acima</option>
+        </select>
+
+        <select id="filter-status">
+            <option value="">Todos status</option>
+            <option value="zerado">Zerado</option>
+            <option value="platinado">Platinado</option>
+            <option value="cem">100% Completo</option>
+        </select>
+
+        <select id="sort-order">
+            <option value="recent">Mais recente</option>
+            <option value="oldest">Mais antigo</option>
+            <option value="alpha">A-Z</option>
+        </select>
+
+        <button id="btn-clear-filters" class="btn-clear">
+            <i class="fa-solid fa-xmark"></i> Limpar
+        </button>
+    </div>
+
+    <!-- Grid de Capas com proteções contra valores nulos nas tags data- -->
+    <div class="games-grid" id="games-grid">
+        {% for jogo in jogos %}
+        <div class="game-card" 
+             data-name="{{ jogo.title|default('')|lower }}" 
+             data-platform="{{ jogo.platform|default('PC') }}" 
+             data-rating="{{ jogo.rating|default(0)|int }}"
+             data-zerado="{{ 'true' if jogo.status_zerado else 'false' }}"
+             data-platinado="{{ 'true' if jogo.status_platinado else 'false' }}"
+             data-cem="{{ 'true' if jogo.status_100 else 'false' }}"
+             data-date="{{ jogo.created_at|default('') }}">
+            
+            <div class="game-cover-wrapper">
+                <img src="{{ jogo.cover_url if jogo.cover_url else url_for('static', filename='images/default_cover.png') }}" alt="Capa de {{ jogo.title }}">
+                <span class="game-platform-badge">{{ jogo.platform }}</span>
+            </div>
+            
+            <div class="game-card-info">
+                <h4>{{ jogo.title }}</h4>
+                
+                <!-- Estrelas de Avaliação Dinâmicas -->
+                <div class="game-stars">
+                    {% for i in range(5) %}
+                        {% if i < (jogo.rating|default(0)|int) %}
+                            <i class="fa-solid fa-star"></i>
+                        {% else %}
+                            <i class="fa-regular fa-star"></i>
+                        {% endif %}
+                    {% endfor %}
+                </div>
+                
+                <!-- Exibição de Status (Pode exibir mais de uma tag se estiverem ativas) -->
+                <div class="game-card-status">
+                    {% if jogo.status_zerado %}
+                        <span class="badge badge-zerado"><i class="fa-solid fa-square-check"></i> Zerado</span>
+                    {% endif %}
+                    {% if jogo.status_platinado %}
+                        <span class="badge badge-platinado"><i class="fa-solid fa-trophy"></i> Platinado</span>
+                    {% endif %}
+                    {% if jogo.status_100 %}
+                        <span class="badge badge-cem">100% Completo</span>
+                    {% endif %}
+                </div>
+            </div>
+
+            <!-- Botões de Ações Rápidas Inferiores -->
+            <div class="game-actions">
+                <a href="{{ url_for('visualizar_jogo', jogo_id=jogo.id) }}" class="btn-action btn-view" title="Visualizar">
+                    <i class="fa-regular fa-eye"></i>
+                </a>
+                <a href="{{ url_for('editar_jogo', jogo_id=jogo.id) }}" class="btn-action btn-edit" title="Editar">
+                    <i class="fa-solid fa-pen"></i>
+                </a>
+
+            <form action="{{ url_for('excluir_jogo', jogo_id=jogo.id) }}" method="POST" style="display: inline;" onsubmit="return confirm('Tem certeza que deseja excluir este jogo?');">
+                <button type="submit" class="btn-action btn-delete" title="Excluir">
+                    <i class="fa-solid fa-trash-can"></i>
+                </button>
+            </form>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+    {% endif %}
+
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script src="{{ url_for('static', filename='js/listagem.js') }}"></script>
+{% endblock %}

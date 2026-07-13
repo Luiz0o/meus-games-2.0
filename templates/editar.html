@@ -1,0 +1,159 @@
+{% extends 'base.html' %}
+
+{% block title %}Editar Jogo - {{ jogo.title }}{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/cadastro.css') }}?v=2.0">
+{% endblock %}
+
+{% block content %}
+<div class="form-container">
+    <div class="form-header">
+        <h2>Editar Jogo</h2>
+        <p>Modifique as informações do jogo selecionado</p>
+    </div>
+
+    <form action="{{ url_for('atualizar_jogo', jogo_id=jogo.id) }}" method="POST" enctype="multipart/form-data" class="form-grid">
+        
+        <!-- COLUNA DA ESQUERDA: CAPA DO JOGO -->
+        <div class="form-group-capa">
+            <span class="section-label">Capa do Jogo</span>
+            <div class="drop-zone-vertical" id="drop-zone">
+                <!-- Se o jogo já possuir capa, exibe o preview dela com opção de alteração -->
+                {% if jogo.cover_url %}
+                <div class="preview-container-vertical" id="preview-container">
+                    <img src="{{ jogo.cover_url }}" alt="Capa atual de {{ jogo.title }}" id="preview-img">
+                    <div class="preview-overlay">
+                        <span class="btn-selecionar"><i class="fa-solid fa-cloud-arrow-up"></i> Alterar Capa</span>
+                    </div>
+                </div>
+                {% else %}
+                <div class="drop-zone-prompt" id="drop-prompt">
+                    <div class="icon-container">
+                        <i class="fa-regular fa-image"></i>
+                    </div>
+                    <h3>Arraste a capa aqui</h3>
+                    <p>ou clique para procurar</p>
+                    <span class="btn-selecionar"><i class="fa-solid fa-plus"></i> Selecionar</span>
+                </div>
+                <div class="preview-container-vertical hidden" id="preview-container">
+                    <img src="" alt="Nova Capa" id="preview-img">
+                    <div class="preview-overlay">
+                        <button type="button" class="remove-preview-btn" id="btn-remove-preview">
+                            <i class="fa-solid fa-trash-can"></i> Remover
+                        </button>
+                    </div>
+                </div>
+                {% endif %}
+                <input type="file" name="cover" id="cover-input" class="hidden" accept="image/*">
+            </div>
+        </div>
+
+        <!-- COLUNA DA DIREITA: CAMPOS DE TEXTO E INPUTS -->
+        <div class="fields-section">
+            
+            <!-- Campo: Título -->
+            <div class="form-group">
+                <label for="title" class="section-label">Título do Jogo</label>
+                <div class="input-wrapper">
+                    <i class="fa-solid fa-gamepad input-icon"></i>
+                    <input type="text" id="title" name="title" value="{{ jogo.title }}" required placeholder="Ex: Gta Online">
+                </div>
+            </div>
+
+            <!-- Campo: Plataforma (Botões de Rádio Customizados) -->
+            <div class="form-group">
+                <span class="section-label">Plataforma</span>
+                <div class="platform-selector">
+                    <label class="platform-radio">
+                        <input type="radio" name="platform" value="PC" {% if jogo.platform == 'PC' %}checked{% endif %} required>
+                        <span>PC</span>
+                    </label>
+                    <label class="platform-radio">
+                        <input type="radio" name="platform" value="PS3" {% if jogo.platform == 'PS3' %}checked{% endif %}>
+                        <span>PS3</span>
+                    </label>
+                    <label class="platform-radio">
+                        <input type="radio" name="platform" value="PS4" {% if jogo.platform == 'PS4' %}checked{% endif %}>
+                        <span>PS4</span>
+                    </label>
+                    <label class="platform-radio">
+                        <input type="radio" name="platform" value="PS5" {% if jogo.platform == 'PS5' %}checked{% endif %}>
+                        <span>PS5</span>
+                    </label>
+                </div>
+            </div>
+
+            <!-- Campo: Avaliação por Estrelas (Input Oculto com Controle JS) -->
+            <div class="form-group">
+                <span class="section-label">Sua Avaliação</span>
+                <div class="star-rating" id="star-rating-container">
+                    {% for i in range(1, 6) %}
+                        <i class="fa-star star {% if i <= (jogo.rating|int) %}fa-solid{% else %}fa-regular{% endif %}" data-value="{{ i }}"></i>
+                    {% endfor %}
+                </div>
+                <input type="hidden" name="rating" id="rating-value" value="{{ jogo.rating|default(0) }}">
+            </div>
+
+            <!-- Seção de Toggles de Status (Design Switch Deslizante) -->
+            <div class="form-group">
+                <span class="section-label">Status de Progresso</span>
+                <div class="status-toggles-container">
+                    
+                    <div class="status-card-toggle">
+                        <div class="status-info">
+                            <i class="fa-solid fa-square-check status-icon icon-zerado"></i> Zerado
+                        </div>
+                        <label class="switch">
+                            <input type="checkbox" name="status_zerado" {% if jogo.status_zerado %}checked{% endif %}>
+                            <span class="slider"></span>
+                        </label>
+                    </div>
+
+                    <div class="status-card-toggle">
+                        <div class="status-info">
+                            <i class="fa-solid fa-trophy status-icon icon-platinado"></i> Platinado
+                        </div>
+                        <label class="switch">
+                            <input type="checkbox" name="status_platinado" {% if jogo.status_platinado %}checked{% endif %}>
+                            <span class="slider"></span>
+                        </label>
+                    </div>
+
+                    <div class="status-card-toggle">
+                        <div class="status-info">
+                            <span class="status-icon icon-cem">100%</span> Completo
+                        </div>
+                        <label class="switch">
+                            <input type="checkbox" name="status_100" {% if jogo.status_100 %}checked{% endif %}>
+                            <span class="slider"></span>
+                        </label>
+                    </div>
+
+                </div>
+            </div>
+
+            <!-- Campo: Observações -->
+            <div class="form-group">
+                <label for="notes" class="section-label">Observações / Anotações</label>
+                <textarea id="notes" name="notes" rows="5" placeholder="Escreva suas conquistas ou comentários sobre o jogo...">{{ jogo.notes if jogo.notes }}</textarea>
+            </div>
+
+            <!-- Botões de Ação Alinhados à Direita -->
+            <div class="form-actions">
+                <a href="{{ url_for('visualizar_jogo', jogo_id=jogo.id) }}" class="btn-cancel">
+                    Cancelar
+                </a>
+                <button type="submit" class="btn-submit-game">
+                    <i class="fa-solid fa-floppy-disk"></i> Salvar Alterações
+                </button>
+            </div>
+
+        </div>
+    </form>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script src="{{ url_for('static', filename='js/cadastro.js') }}"></script>
+{% endblock %}

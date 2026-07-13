@@ -1,0 +1,653 @@
+/* RESET DE ESTILOS */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Inter', sans-serif;
+}
+
+:root {
+    --bg-color: #0d111a;
+    --navbar-bg: #111827;
+    --card-bg: #141c2e;
+    --text-primary: #ffffff;
+    --text-secondary: #9ca3af;
+    --primary-gradient: linear-gradient(135deg, #6366f1 0%, #a855f7 100%);
+    --accent-blue: #2563eb;
+    --border-color: #1f2937;
+}
+
+body {
+    background-color: var(--bg-color);
+    color: var(--text-primary);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+/* NAVBAR STYLE */
+.navbar {
+    background-color: var(--navbar-bg);
+    border-bottom: 1px solid var(--border-color);
+    padding: 1rem 2rem;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+.navbar-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.logo-icon {
+    font-size: 1.5rem;
+    color: #6366f1;
+}
+
+.logo-text {
+    font-size: 1.25rem;
+    font-weight: 700;
+}
+
+.logo-text .highlight {
+    color: #2563eb;
+}
+
+.nav-menu {
+    display: flex;
+    gap: 1.5rem;
+    background-color: rgba(0, 0, 0, 0.2);
+    padding: 0.4rem;
+    border-radius: 9999px;
+    border: 1px solid var(--border-color);
+}
+
+.nav-link {
+    color: var(--text-secondary);
+    text-decoration: none;
+    padding: 0.5rem 1.2rem;
+    border-radius: 9999px;
+    font-size: 0.9rem;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    transition: all 0.2s ease;
+}
+
+.nav-link:hover {
+    color: var(--text-primary);
+}
+
+.nav-link.active {
+    background-color: rgba(37, 99, 235, 0.15);
+    color: #3b82f6;
+}
+
+/* BOTÕES */
+.btn-primary {
+    background: var(--primary-gradient);
+    color: white;
+    padding: 0.6rem 1.4rem;
+    border-radius: 9999px;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 0.9rem;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    box-shadow: 0 4px 14px rgba(99, 102, 241, 0.3);
+    transition: transform 0.2s ease;
+}
+
+.btn-secondary {
+    background-color: #2563eb;
+    color: white;
+    padding: 0.6rem 1.4rem;
+    border-radius: 9999px;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 0.9rem;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    box-shadow: 0 4px 14px rgba(37, 99, 235, 0.3);
+}
+
+.btn-primary:hover, .btn-secondary:hover {
+    transform: translateY(-1px);
+}
+
+/* CONTEÚDO PRINCIPAL */
+.main-content {
+    flex: 1;
+    max-width: 1200px;
+    width: 100%;
+    margin: 0 auto;
+    padding: 3rem 2rem;
+}
+
+/* DASHBOARD (HOME) */
+.dashboard-container {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+.dashboard-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.welcome-text h1 {
+    font-size: 2rem;
+    font-weight: 700;
+    margin-bottom: 0.25rem;
+}
+
+.welcome-text p {
+    color: var(--text-secondary);
+}
+
+/* CARDS DE ESTATÍSTICA */
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+}
+
+.stat-card {
+    background-color: var(--card-bg);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    border-radius: 16px;
+    padding: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.card-icon {
+    font-size: 1.25rem;
+}
+
+.blue-text { color: #3b82f6; }
+.trophy-text { color: #eab308; }
+.star-text { color: #a855f7; }
+
+.card-value {
+    font-size: 2rem;
+    font-weight: 700;
+}
+
+.card-label {
+    color: var(--text-secondary);
+    font-size: 0.85rem;
+}
+
+/* FOOTER */
+.footer {
+    background-color: var(--navbar-bg);
+    border-top: 1px solid var(--border-color);
+    padding: 1.5rem 2rem;
+    margin-top: auto;
+}
+
+.footer-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: var(--text-secondary);
+    font-size: 0.85rem;
+}
+
+.footer-logo {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+/* FORMULÁRIO DE CADASTRO */
+.form-container {
+    background-color: transparent;
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+.form-header h2 {
+    font-size: 1.85rem;
+    font-weight: 700;
+    margin-bottom: 0.25rem;
+}
+
+.form-header p {
+    color: var(--text-secondary);
+    margin-bottom: 2rem;
+}
+
+.form-grid {
+    display: grid;
+    grid-template-columns: 320px 1fr;
+    gap: 3rem;
+    align-items: start;
+}
+
+.section-label {
+    display: block;
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin-bottom: 0.75rem;
+}
+
+/* BOX DE UPLOAD (DROP ZONE) */
+.drop-zone {
+    background-color: rgba(20, 28, 46, 0.4);
+    border: 2px dashed rgba(255, 255, 255, 0.1);
+    border-radius: 16px;
+    height: 450px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+}
+
+.upload-icon {
+    font-size: 2.5rem;
+    color: #2563eb;
+    margin-bottom: 1rem;
+}
+
+.drop-zone-text {
+    font-size: 1rem;
+    font-weight: 600;
+}
+
+.drop-zone-subtext {
+    color: var(--text-secondary);
+    font-size: 0.85rem;
+    display: block;
+    margin-bottom: 1.5rem;
+}
+
+.btn-select-file {
+    background-color: #2563eb;
+    color: white;
+    border: none;
+    padding: 0.6rem 1.2rem;
+    border-radius: 9999px;
+    font-weight: 600;
+    font-size: 0.85rem;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+/* INPUTS DE TEXTO E TEXTAREA */
+.form-group {
+    margin-bottom: 1.75rem;
+}
+
+.input-wrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.input-icon {
+    position: absolute;
+    left: 1.2rem;
+    color: var(--text-secondary);
+}
+
+.input-wrapper input {
+    width: 100%;
+    background-color: rgba(20, 28, 46, 0.6);
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    padding: 1rem 1rem 1rem 3rem;
+    color: white;
+    font-size: 0.95rem;
+    outline: none;
+    transition: border-color 0.2s;
+}
+
+.input-wrapper input:focus, textarea:focus {
+    border-color: #2563eb;
+}
+
+textarea {
+    width: 100%;
+    background-color: rgba(20, 28, 46, 0.6);
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    padding: 1rem;
+    color: white;
+    font-size: 0.95rem;
+    outline: none;
+    resize: none;
+}
+
+/* SELETOR DE PLATAFORMA (CHIPS/RADIO) */
+.platform-selector {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+}
+
+.platform-radio input {
+    display: none;
+}
+
+.platform-radio span {
+    display: block;
+    background-color: rgba(20, 28, 46, 0.6);
+    border: 1px solid var(--border-color);
+    padding: 0.5rem 1.2rem;
+    border-radius: 9999px;
+    font-size: 0.85rem;
+    font-weight: 500;
+    color: var(--text-secondary);
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.platform-radio input:checked + span {
+    background-color: rgba(255, 255, 255, 0.08);
+    border-color: var(--text-secondary);
+    color: white;
+}
+
+/* SWITCHES / TOGGLES DE STATUS */
+.status-toggles-container {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1rem;
+}
+
+.status-card-toggle {
+    background-color: rgba(20, 28, 46, 0.4);
+    border: 1px solid var(--border-color);
+    border-radius: 14px;
+    padding: 1rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.status-info {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    font-weight: 600;
+    font-size: 0.95rem;
+}
+
+.status-icon { font-size: 1.1rem; }
+.icon-zerado { color: #22c55e; }
+.icon-platinado { color: #eab308; }
+.icon-cem { color: #ef4444; font-weight: 800; font-family: sans-serif; }
+
+/* Switch Toggle (O botão deslizante em si) */
+.switch {
+    position: relative;
+    display: inline-block;
+    width: 44px;
+    height: 24px;
+}
+
+.switch input { display: none; }
+
+.slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background-color: #374151;
+    transition: .3s;
+    border-radius: 9999px;
+}
+
+.slider:before {
+    position: absolute;
+    content: "";
+    height: 18px; width: 18px;
+    left: 3px; bottom: 3px;
+    background-color: white;
+    transition: .3s;
+    border-radius: 50%;
+}
+
+.switch input:checked + .slider {
+    background-color: #2563eb;
+}
+
+.switch input:checked + .slider:before {
+    transform: translateX(20px);
+}
+
+/* AVALIAÇÃO EM ESTRELAS */
+.star-rating {
+    display: flex;
+    gap: 0.4rem;
+    font-size: 1.5rem;
+    color: #374151;
+}
+
+.star {
+    cursor: pointer;
+    transition: color 0.1s;
+}
+
+.star-rating .fa-solid {
+    color: #374151; /* Mantém o padrão escuro das estrelas vazias/selecionadas conforme o print */
+}
+
+/* BOTÕES DE AÇÃO INTERNOS */
+.form-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 1rem;
+    margin-top: 2.5rem;
+    padding-top: 1.5rem;
+}
+
+.btn-cancel {
+    background-color: rgba(20, 28, 46, 0.6);
+    border: 1px solid var(--border-color);
+    color: white;
+    padding: 0.75rem 2rem;
+    border-radius: 12px;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 0.95rem;
+    transition: background-color 0.2s;
+}
+
+.btn-cancel:hover {
+    background-color: rgba(255, 255, 255, 0.05);
+}
+
+.btn-submit-game {
+    background: var(--primary-gradient);
+    color: white;
+    border: none;
+    padding: 0.75rem 2rem;
+    border-radius: 12px;
+    font-weight: 600;
+    font-size: 0.95rem;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    box-shadow: 0 4px 14px rgba(99, 102, 241, 0.3);
+}
+
+/* BIBLIOTECA / LISTAGEM */
+.library-container {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.library-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2.5rem;
+}
+
+.library-title-zone h2 {
+    font-size: 2rem;
+    font-weight: 700;
+    margin-bottom: 0.25rem;
+}
+
+.game-counter {
+    color: var(--text-secondary);
+    font-size: 0.95rem;
+}
+
+/* CARD DE ESTADO VAZIO (Fiel ao print image_08a76a.png) */
+.empty-state-card {
+    background-color: rgba(20, 28, 46, 0.2);
+    border: 1px dashed rgba(255, 255, 255, 0.05);
+    border-radius: 24px;
+    padding: 5rem 2rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    max-width: 650px;
+    margin: 2rem auto 0 auto;
+}
+
+.empty-icon-wrapper {
+    background-color: rgba(37, 99, 235, 0.1);
+    width: 80px;
+    height: 80px;
+    border-radius: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 2rem;
+}
+
+.empty-gamepad-icon {
+    font-size: 2.2rem;
+    color: #2563eb;
+}
+
+.empty-state-card h3 {
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+}
+
+.empty-state-card p {
+    color: var(--text-secondary);
+    font-size: 0.95rem;
+    max-width: 400px;
+    line-height: 1.5;
+}
+
+.mt-4 {
+    margin-top: 1.5rem;
+}
+
+/* GRID DE JOGOS (Para quando houver dados) */
+.games-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 2rem;
+}
+
+.game-card {
+    background-color: var(--card-bg);
+    border: 1px solid rgba(255, 255, 255, 0.03);
+    border-radius: 16px;
+    overflow: hidden;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.game-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+}
+
+.game-cover-wrapper {
+    position: relative;
+    width: 100%;
+    height: 300px;
+    background-color: rgba(0, 0, 0, 0.2);
+}
+
+.game-cover-wrapper img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.game-platform-badge {
+    position: absolute;
+    top: 0.75rem;
+    right: 0.75rem;
+    background-color: rgba(13, 17, 26, 0.8);
+    backdrop-filter: blur(4px);
+    padding: 0.3rem 0.75rem;
+    border-radius: 9999px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.game-card-info {
+    padding: 1.25rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.game-card-info h4 {
+    font-size: 1rem;
+    font-weight: 600;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+/* BADGES DE STATUS NOS CARDS */
+.game-card-status {
+    display: flex;
+    gap: 0.5rem;
+}
+
+.badge {
+    font-size: 0.75rem;
+    font-weight: 600;
+    padding: 0.25rem 0.6rem;
+    border-radius: 6px;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.3rem;
+}
+
+.badge-zerado { background-color: rgba(34, 197, 94, 0.15); color: #22c55e; }
+.badge-platinado { background-color: rgba(234, 179, 8, 0.15); color: #eab308; }
+.badge-cem { background-color: rgba(239, 68, 68, 0.15); color: #ef4444; }

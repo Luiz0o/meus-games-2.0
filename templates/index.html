@@ -1,0 +1,55 @@
+{% extends 'base.html' %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/index.css') }}">
+{% endblock %}
+
+{% block title %}Início - Minha Biblioteca de Jogos{% endblock %}
+
+{% block content %}
+<div class="dashboard-container">
+    <!-- Cabeçalho de Boas-vindas -->
+    <div class="dashboard-header">
+        <div class="welcome-text">
+            <h1>Olá! 👋</h1>
+            <p>Aqui está um resumo da sua coleção</p>
+        </div>
+    </div>
+
+    <!-- Grid de Estatísticas (Cards) -->
+    <div class="stats-grid">
+        <!-- Card 1: Total de Jogos -->
+        <div class="stat-card">
+            <div class="card-icon blue-text">
+                <i class="fa-solid fa-chart-simple"></i>
+            </div>
+            <div class="card-value">{{ total_jogos }}</div>
+            <div class="card-label">Jogos</div>
+        </div>
+
+        <!-- Card 2: Platinados -->
+        <div class="stat-card">
+            <div class="card-icon trophy-text">
+                <i class="fa-solid fa-trophy"></i>
+            </div>
+            <div class="card-value">{{ total_platinados }}</div>
+            <div class="card-label">Platinados</div>
+        </div>
+
+        <!-- Card 3: Média de Notas -->
+        <div class="stat-card">
+            <div class="card-icon star-text">
+                <i class="fa-solid fa-star"></i>
+            </div>
+            <div class="card-value">
+                {% if media_notas is not none %}
+                    {{ media_notas }}
+                {% else %}
+                    &mdash;
+                {% endif %}
+            </div>
+            <div class="card-label">Média</div>
+        </div>
+    </div>
+</div>
+{% endblock %}
