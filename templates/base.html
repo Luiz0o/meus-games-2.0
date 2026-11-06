@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{% block title %}Minha Biblioteca de Jogos{% endblock %}</title>
+    <title>{% block title %}Nexus - Biblioteca & Tracker de Jogos{% endblock %}</title>
     <!-- Google Fonts para um visual moderno (Inter) -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -20,10 +20,14 @@
     <!-- NAVBAR SUPERIOR -->
     <header class="navbar">
         <div class="navbar-container">
-            <div class="logo">
-                <i class="fa-solid fa-gamepad logo-icon"></i>
-                <span class="logo-text">Minha <span class="highlight">Biblioteca</span></span>
-            </div>
+            <a href="{{ url_for('index') }}" class="nav-brand"
+                style="display: flex; align-items: center; gap: 0.65rem; text-decoration: none;">
+                <img src="{{ url_for('static', filename='images/logo.svg') }}?v=1.2" alt="Logo Nexus"
+                    style="width: 34px; height: 34px; display: block;">
+                <span style="font-size: 1.2rem; font-weight: 800; color: #ffffff; letter-spacing: -0.02em;">
+                    NEX<span style="color: #3b82f6;">US</span>
+                </span>
+            </a>
             
             <div class="nav-menu">
             <a href="{{ url_for('index') }}" class="nav-link {% if request.endpoint == 'index' %}active{% endif %}">
@@ -75,7 +79,7 @@
                 <i class="fa-solid fa-gamepad"></i>
                 <span>Minha Biblioteca de Jogos</span>
             </div>
-            <p class="footer-credits">Desenvolvido por <strong>Luiz Felipe</strong> &middot; &copy; 2026</p>
+            <p>&copy; 2026 <strong>Nexus</strong> · Desenvolvido por Luiz Felipe</p>
         </div>
     </footer>
 
