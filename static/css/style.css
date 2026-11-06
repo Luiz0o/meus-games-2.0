@@ -653,41 +653,57 @@ textarea {
 .badge-cem { background-color: rgba(239, 68, 68, 0.15); color: #ef4444; }
 
 /* ==========================================================================
-   AJUSTE MOBILE: NAVBAR RESPONSIVA
+   AJUSTE DE LAYOUT PARA DISPOSITIVOS MÓVEIS (MOBILE)
    ========================================================================== */
-@media (max-width: 768px) {
-    /* Permite que a navbar empilhe os elementos ou ajuste o espaçamento */
-    .navbar {
-        flex-direction: column;
-        gap: 0.75rem;
-        padding: 0.75rem 1rem;
-        height: auto; /* Remove alturas fixas para não cortar conteúdo */
+@media screen and (max-width: 768px) {
+    /* Força a barra de navegação a quebrar linha e libertar espaço */
+    nav, 
+    .navbar, 
+    header {
+        display: flex !important;
+        flex-direction: column !important;
+        align-items: center !important;
+        justify-content: center !important;
+        height: auto !important;
+        padding: 0.75rem 0.5rem !important;
+        gap: 0.6rem !important;
     }
 
-    /* Centraliza a marca no topo */
-    .nav-brand {
-        justify-content: center;
-        width: 100%;
+    /* Garante que o logótipo e texto NEXUS ficam centrados */
+    .nav-brand, 
+    nav > a:first-child {
+        display: flex !important;
+        justify-content: center !important;
+        align-items: center !important;
+        width: 100% !important;
     }
 
-    /* Ajusta a lista de links para caber na horizontal com scroll se necessário */
-    .nav-links, .nav-menu {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        flex-wrap: wrap;
-        gap: 0.5rem;
-        width: 100%;
+    /* Agrupa os botões de navegação sem transbordar o ecrã */
+    nav ul, 
+    .nav-links, 
+    .nav-menu,
+    nav > div {
+        display: flex !important;
+        flex-wrap: wrap !important;
+        justify-content: center !important;
+        align-items: center !important;
+        gap: 0.4rem !important;
+        padding: 0 !important;
+        margin: 0 !important;
+        width: 100% !important;
     }
 
-    /* Reduz ligeiramente os botões de navegação para toque no telemóvel */
-    .nav-item, .nav-link {
-        font-size: 0.85rem;
-        padding: 0.45rem 0.75rem;
+    /* Reduz o tamanho das hiperligações para caberem sem cortes */
+    nav a, 
+    .nav-link, 
+    .nav-item {
+        font-size: 0.85rem !important;
+        padding: 0.35rem 0.65rem !important;
+        white-space: nowrap !important;
     }
 
-    /* Dá espaçamento inferior para o rodapé não ficar colado aos controlos do telemóvel */
-    footer, .footer {
-        padding-bottom: 2rem;
+    /* Evita que o rodapé fique cortado na extremidade inferior */
+    footer {
+        padding-bottom: 2.5rem !important;
     }
 }
