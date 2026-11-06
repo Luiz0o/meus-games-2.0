@@ -707,3 +707,69 @@ textarea {
         padding-bottom: 2.5rem !important;
     }
 }
+
+/* ==========================================================================
+   AJUSTE MOBILE: NAVBAR ORGANIZADA EM BLOCOS
+   ========================================================================== */
+@media screen and (max-width: 768px) {
+    /* Força o contentor principal da barra a fluir para baixo */
+    header, nav, .navbar {
+        display: flex !important;
+        flex-direction: column !important;
+        align-items: center !important;
+        gap: 0.85rem !important;
+        height: auto !important;
+        padding: 1rem 0.75rem !important;
+    }
+
+    /* Linha do topo: Logótipo NEXUS e botão Adicionar Jogo */
+    .nav-brand, 
+    nav > a:first-child {
+        display: flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        width: auto !important;
+    }
+
+    /* Contentor com os links de navegação */
+    .nav-links, 
+    .nav-menu, 
+    nav ul,
+    nav > div {
+        display: flex !important;
+        flex-direction: row !important;
+        flex-wrap: wrap !important;
+        justify-content: center !important;
+        align-items: center !important;
+        gap: 0.5rem !important;
+        width: 100% !important;
+        position: static !important; /* Remove qualquer posicionamento absoluto */
+        background: transparent !important;
+    }
+
+    /* Estilo dos botões/links individuais */
+    nav a, 
+    .nav-link, 
+    .nav-item {
+        font-size: 0.8rem !important;
+        padding: 0.4rem 0.65rem !important;
+        white-space: nowrap !important;
+        display: inline-flex !important;
+        align-items: center !important;
+        gap: 0.35rem !important;
+    }
+
+    /* O botão de Adicionar Jogo em destaque */
+    .btn-add,
+    nav .btn,
+    nav a[href*="adicionar"],
+    nav a[href*="add"] {
+        padding: 0.5rem 1rem !important;
+        font-size: 0.85rem !important;
+    }
+
+    /* Rodapé desimpedido dos botões do sistema operativo */
+    footer {
+        padding-bottom: 3rem !important;
+    }
+}
