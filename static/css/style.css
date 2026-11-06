@@ -651,3 +651,43 @@ textarea {
 .badge-zerado { background-color: rgba(34, 197, 94, 0.15); color: #22c55e; }
 .badge-platinado { background-color: rgba(234, 179, 8, 0.15); color: #eab308; }
 .badge-cem { background-color: rgba(239, 68, 68, 0.15); color: #ef4444; }
+
+/* ==========================================================================
+   AJUSTE MOBILE: NAVBAR RESPONSIVA
+   ========================================================================== */
+@media (max-width: 768px) {
+    /* Permite que a navbar empilhe os elementos ou ajuste o espaçamento */
+    .navbar {
+        flex-direction: column;
+        gap: 0.75rem;
+        padding: 0.75rem 1rem;
+        height: auto; /* Remove alturas fixas para não cortar conteúdo */
+    }
+
+    /* Centraliza a marca no topo */
+    .nav-brand {
+        justify-content: center;
+        width: 100%;
+    }
+
+    /* Ajusta a lista de links para caber na horizontal com scroll se necessário */
+    .nav-links, .nav-menu {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-wrap: wrap;
+        gap: 0.5rem;
+        width: 100%;
+    }
+
+    /* Reduz ligeiramente os botões de navegação para toque no telemóvel */
+    .nav-item, .nav-link {
+        font-size: 0.85rem;
+        padding: 0.45rem 0.75rem;
+    }
+
+    /* Dá espaçamento inferior para o rodapé não ficar colado aos controlos do telemóvel */
+    footer, .footer {
+        padding-bottom: 2rem;
+    }
+}
